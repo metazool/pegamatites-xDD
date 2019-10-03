@@ -2,7 +2,8 @@
 #RUN ALL  - STROMATOLITES
 #==============================================================================
 
-import os, time, subprocess, yaml
+import os, time, subprocess, sys, yaml
+sys.path.append('.')
 from yaml import Loader
 
 #tic

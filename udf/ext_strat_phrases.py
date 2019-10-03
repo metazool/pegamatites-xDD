@@ -13,38 +13,13 @@
 import time, urllib.request, urllib.error, urllib.parse, csv, random, psycopg2, re, string, yaml
 from stop_words import get_stop_words
 from psycopg2.extensions import AsIs
+import requests
 from yaml import Loader
+from download_csv import download_csv
 
 #tic
 start_time = time.time()
-
-#==============================================================================
-# DEFINE FUNCTION TO DOWNLOAD CSV
-#==============================================================================
-def download_csv( url ):
-
-    #return variable
-    dump_dict = {}
-
-    #get strat_names from Macrostrat API
-    dump = urllib.request.urlopen( url )
-    dump = csv.reader(dump)
-
-    #unpack downloaded CSV as list of tuples
-    #--> length of VARIABLE == number of fields
-    #--> length of VARIABLE[i] == number of rows
-    #--> VARIABLE[i][0] = header name
-    cols = list(zip(*dump))
-
-    #key names correspond to field names (headers in the CSV file)
-    for field in cols:
-        dump_dict[field[0]]=field[1:]
-
-    dump_dict['headers'] = sorted(dump_dict.keys())
-
-    return dump_dict
-
-#==============================================================================
+#===
 # CONNECT TO POSTGRES
 #==============================================================================
 with open('./credentials', 'r') as credential_yaml:

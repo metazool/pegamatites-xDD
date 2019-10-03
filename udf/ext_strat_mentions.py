@@ -6,34 +6,11 @@
 #==============================================================================
 import time, urllib.request, urllib.error, urllib.parse, csv, random, psycopg2, re, yaml
 from psycopg2.extensions import AsIs
+from download_csv import download_csv
 from yaml import Loader
 
 #tic
 start_time = time.time()
-
-#function for dowloading CSVs from a URL
-def download_csv( url ):
-    
-    #return variable
-    dump_dict = {}
-    
-    #get strat_names from Macrostrat API
-    dump = urllib.request.urlopen( url )
-    dump = csv.reader(dump)
-    
-    #unpack downloaded CSV as list of tuples
-    #--> length of VARIABLE == number of fields
-    #--> length of VARIABLE[i] == number of rows
-    #--> VARIABLE[i][0] = header name
-    cols = list(zip(*dump))
-    
-    #key names correspond to field names (headers in the CSV file)
-    for field in cols:
-        dump_dict[field[0]]=field[1:]
-        
-    dump_dict['headers'] = sorted(dump_dict.keys())
-    
-    return dump_dict
 
 #==============================================================================
 # CONNECT TO POSTGRES
