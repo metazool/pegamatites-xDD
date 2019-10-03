@@ -1,5 +1,6 @@
 import os
 import yaml
+import platform
 
 import pathlib
 import psycopg2
@@ -37,7 +38,9 @@ def load_nlp():
 
     cursor.execute("CREATE INDEX ON {app_name}_sentences_nlp352 (sentid);".format(**config))
 
-    from_data = pathlib.PureWindowsPath(os.path.join(os.getcwd(), 'input', 'sentences_nlp352'))
+    from_data = os.path.join(os.getcwd(), 'input', 'sentences_nlp352')
+    if platform.system() == 'Windows':
+        from_data = pathlib.PureWindowsPath(from_data)
 
     with open(str(from_data)) as data:
         cursor.copy_from(data, "{app_name}_sentences_nlp352".format(**config))

@@ -5,7 +5,7 @@
 # ACQUIRE RELEVANT MODULES and DATA
 #==============================================================================
 
-import time, random, psycopg2, urllib2, csv, yaml
+import time, random, psycopg2, urllib.request, urllib.error, urllib.parse, csv, yaml
 from yaml import Loader
 
 #tic
@@ -20,7 +20,7 @@ def download_csv( url ):
     dump_dict = {}
     
     #get strat_names from Macrostrat API
-    dump = urllib2.urlopen( url )
+    dump = urllib.request.urlopen( url )
     dump = csv.reader(dump)
     
     #unpack downloaded CSV as list of tuples
@@ -243,7 +243,7 @@ success = 'SUMMARY OF AGE CHECKS: yays = %s; nays = %s; unknown = %s' %(yay, nay
 
 #summary of performance time
 elapsed_time = time.time() - start_time
-print '\n ###########\n\n %s \n elapsed time: %d seconds\n\n ###########\n\n' %(success,elapsed_time)
+print('\n ###########\n\n %s \n elapsed time: %d seconds\n\n ###########\n\n' %(success,elapsed_time))
 
     
     

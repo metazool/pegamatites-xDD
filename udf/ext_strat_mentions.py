@@ -4,7 +4,7 @@
 
 # ACQUIRE RELEVANT MODULES
 #==============================================================================
-import time, urllib2, csv, random, psycopg2, re, yaml
+import time, urllib.request, urllib.error, urllib.parse, csv, random, psycopg2, re, yaml
 from psycopg2.extensions import AsIs
 from yaml import Loader
 
@@ -18,7 +18,7 @@ def download_csv( url ):
     dump_dict = {}
     
     #get strat_names from Macrostrat API
-    dump = urllib2.urlopen( url )
+    dump = urllib.request.urlopen( url )
     dump = csv.reader(dump)
     
     #unpack downloaded CSV as list of tuples
@@ -106,7 +106,7 @@ with open('./var/strat_variables.txt') as fid:
     strat_variables = fid.readlines()
     
 for i in strat_variables:
-    exec i
+    exec(i)
 
 #PRE-PROCESS: hack to replace weird strings
 for idx,line in enumerate(sentences):
@@ -255,8 +255,8 @@ success = 'number of stratigraphic mentions : %s' %len(strat_list)
 
 #summary of performance time
 elapsed_time = time.time() - start_time
-print '\n ###########\n\n %s \n elapsed time: %d seconds\n\n ###########\n\n' %(success,elapsed_time)
+print('\n ###########\n\n %s \n elapsed time: %d seconds\n\n ###########\n\n' %(success,elapsed_time))
 
 #print out random result
-r=random.randint(0,len(strat_list)-1); show = "\n".join(str(x) for x in strat_list[r].split('\t')); print "=========================\n" + show + "\n========================="
+r=random.randint(0,len(strat_list)-1); show = "\n".join(str(x) for x in strat_list[r].split('\t')); print("=========================\n" + show + "\n=========================")
 

@@ -43,26 +43,26 @@ for idx,item in enumerate(bib):
     url =[]
 
     #as failsafe, always check if each variable exists
-    if isinstance(item['_gddid'],unicode):
+    if isinstance(item['_gddid'],str):
         docid=item['_gddid'].encode('ascii','ignore')
     else:
         docid=item['_gddid']
 
-    if isinstance(item['title'],unicode):
+    if isinstance(item['title'],str):
         title=item['title'].encode('ascii','ignore')
     else:
         title=item['title']
 
-    if isinstance(item['journal']['name'],unicode):
+    if isinstance(item['journal']['name'],str):
         journal=item['journal']['name'].encode('ascii','ignore')
     else:
         journal=item['journal']['name']
 
-    if 'author' in item.keys():
+    if 'author' in list(item.keys()):
         for name in item['author']:
             names.append(name['name'].encode('ascii','ignore'))
 
-    if 'link' in item.keys():
+    if 'link' in list(item.keys()):
         url=item['link'][0]['url']
 
         for link in item['link']:
