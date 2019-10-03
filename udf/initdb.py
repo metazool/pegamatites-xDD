@@ -48,7 +48,7 @@ cursor.execute("""
 """)
 connection.commit()
 
-#TARGET_ADJECTIVES    
+#TARGET_ADJECTIVES
 cursor.execute("""
     DROP TABLE IF EXISTS target_adjectives CASCADE;
     CREATE TABLE target_adjectives(
@@ -59,6 +59,21 @@ cursor.execute("""
         target_adjective text);
 """)
 connection.commit()
+
+#TARGET_MINERALS
+cursor.execute("""
+    DROP TABLE IF EXISTS target_minerals CASCADE;
+    CREATE TABLE target_minerals (
+        docid text,
+        sentid int,
+        target_id int,
+        target_word text,
+        target_mineral_id int,
+        target_mineral_link text,
+        target_mineral text);
+""")
+connection.commit()
+
 
 #STRAT_PHRASES
 cursor.execute("""
@@ -117,6 +132,7 @@ cursor.execute("""
         );
 """)
 connection.commit()
+
 
 #AGE CHECK
 cursor.execute("""
