@@ -1,4 +1,9 @@
-# Stromatolite Application Demonstration
+# Pegmatites deep dive
+
+A project to investigate the stratigraphy of minerals associated with pegmatites, cloned from the original (Stromatolites demo)[https://github.com/UW-Macrostrat/stromatolites_demo] for GeoDeepDive applications, see the original README below.
+
+
+## Stromatolite Application
 We present a demonstration of the [GeoDeepDive](https://geodeepdive.org) text mining application used 
 in Peters, Husson and Wilcots [2017, Geology](http://doi.org/10.1130/G38931.1). The goal of this application is to identify tuples between stromatolite fossils and stratigraphic names in order to assess the spatio-temporal distribution
 of stromatolites across Earth history. This application uses a combination of Python and 
