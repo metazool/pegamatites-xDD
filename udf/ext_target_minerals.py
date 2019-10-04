@@ -32,21 +32,19 @@ connection = psycopg2.connect(
     port=credentials['postgres']['port'])
 cursor = connection.cursor()
 
-# IMPORT TARGETS WITH DEPENDENTS
+# Import target words
 cursor.execute("""
     SELECT docid, sentid, target_id, target_word, target_children
     FROM target_instances
-    WHERE target_children<>'[[]]';
 """)
 
 target = cursor.fetchall()
 
-# IMPORT THE SENTENCES DUMP
+# Import the sentences linked to target words
 cursor.execute("""
     WITH temp as (
             SELECT DISTINCT ON (docid, sentid) docid, sentid
 		     FROM target_instances
-            WHERE target_children<>'[[]]'
     )
 
 
@@ -76,34 +74,40 @@ mineral_names = [name.lower() for name in minerals['mineral']]
 adj = []
 for idx, line in enumerate(target):
     docid, sentid, target_id, target_word, target_children = line
-    target_children = eval(target_children)
-    target_children = target_children[0]
 
-
-    sent = [elem for elem in sentences if elem[0]
+    # find the corresponding sentence (docid & sentid)
+    # TODO consider looking for a set of related sentences either side
+    sentence_list = [elem for elem in sentences if elem[0]
             == docid and elem[1] == sentid]
 
-    for c in target_children:
-        pos = sent[0][3][c]
-        token = sent[0][2][c]
-        print(pos, token)
-        if pos == 'NN' and token.lower() in mineral_names:
+    for sent in sentence_list:
+        print(sent)
+        tokens = sent[2]
+        parts_of_speech = sent[3]
 
-            # TODO add mineral link and ID
-            # write to PSQL table
-            cursor.execute("""
-                INSERT INTO target_minerals(   docid,
-                                                sentid,
-                                                target_id,
-                                                target_word,
-                                                target_mineral)
+        for index, pos in enumerate(parts_of_speech):
+            token = tokens[index]
+            print(pos, token)
+            if pos == 'NN' and token.lower() in mineral_names:
 
-                VALUES (%s, %s, %s, %s, %s);""",
-                           (docid, sentid, target_id,
-                            target_word, token)
+                mineral_index = mineral_names.index(token.lower())
+                mineral_link = minerals['url'][mineral_index]
+                mineral_id = minerals['mineral_id'][mineral_index]
+
+                # write to PSQL table
+                cursor.execute("""
+                    INSERT INTO target_minerals(   docid,
+                                                    sentid,
+                                                    target_id,
+                                                    target_word,
+                                                    target_mineral,
+                                                    target_mineral_link,
+                                                    target_mineral_id)
+
+                    VALUES (%s, %s, %s, %s, %s, %s, %s);""",
+                               (docid, sentid, target_id,
+                            target_word, token, mineral_link, mineral_id)
                            )
-        if c < 0:
-            print('something is up!')
 
 # push insertions to the database
 connection.commit()

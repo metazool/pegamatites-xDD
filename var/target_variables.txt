@@ -6,6 +6,7 @@
 #   EXAMPLE:    [r'\b' + ooid + r'\b', r'\b' + ooids + r'\b']
 #               will find all instances of 'ooid' or 'ooids' bound by a non-alphanumeric character
 target_names = ['pegmatite']
+mineral_names = ['']
 
 #an optional list of false hits
 bad_words = []
