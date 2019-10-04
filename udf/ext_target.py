@@ -76,6 +76,7 @@ for line in cursor:
         matches = [m.start() for m in re.finditer(name, sent.lower())]
 
         if matches:
+
             # if at least one match is found, count number of spaces backward
             # to arrive at word index
             indices = [sent[0:m].count(' ') for m in matches]

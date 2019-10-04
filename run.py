@@ -30,6 +30,10 @@ os.system('python ./udf/buildbib.py')
 print('Step 3: Find stromatolite instances ...')
 os.system('python ./udf/ext_target.py')
 
+#FIND MINERAL NAMES 
+print('Step 3: Find stromatolite instances ...')
+os.system('python ./udf/ext_target_minerals.py')
+
 #FIND STRATIGRAPHIC ENTITIES
 print('Step 4: Find stratigraphic entities ...')
 os.system('python ./udf/ext_strat_phrases.py')
