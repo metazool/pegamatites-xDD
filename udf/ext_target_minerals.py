@@ -1,9 +1,4 @@
-# ==============================================================================
-# TARGET ADJECTIVE EXTRACTOR
-# ==============================================================================
-
-# import relevant modules and data
-# ==============================================================================
+""" Extract mentions of minerals and link to mindat"""
 import time
 import random
 import re
