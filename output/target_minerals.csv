@@ -1,0 +1,8 @@
+docid,sentid,target_id,target_word,target_mineral_id,target_mineral_link,target_mineral
+55adf5cde13823763a830891,507,7,pegmatites,4003,http://www.mindat.org/min-4003.html,tourmaline
+55adf5cde13823763a830891,2143,8,pegmatite,1389,http://www.mindat.org/min-1389.html,epidote
+55adf5cde13823763a830891,2143,8,pegmatite,11468,https://www.mindat.org/min-11468.html,chlorite
+55b6cd71e13823bd29ba7d93,2573,9,pegmatite,1209,http://www.mindat.org/min-1209.html,Copper
+55b6cd71e13823bd29ba7d93,2616,10,pegmatite,2815,http://www.mindat.org/min-2815.html,muscovite
+55b6cd71e13823bd29ba7d93,2720,13,pegmatite,2815,http://www.mindat.org/min-2815.html,muscovite
+55b6cd71e13823bd29ba7d93,2720,14,pegmatite,2815,http://www.mindat.org/min-2815.html,muscovite
